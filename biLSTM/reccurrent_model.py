@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 from collections import defaultdict
+from tqdm import tqdm
 
 #Funcion que crea un vocabulario de palabras con un indice numerico
 def vocab():
@@ -40,7 +41,7 @@ class biLSTM():
 		optimizer = torch.optim.SGD(list(self.emb.parameters()) + list(self.bilstm.parameters()) + list(self.outLayer.parameters()), lr=0.1)
 		
 		#Train the network
-		for epoch in range(its):
+		for epoch in tqdm(range(its)):
 			for sent, pred in self.train_pairs:
 				#forward
 				sent = torch.tensor(sent)
